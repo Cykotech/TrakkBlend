@@ -1,0 +1,27 @@
+button {
+    width: 35%;
+    background-color: #5A7684;
+    border-radius: .5rem;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    color: #03191E;
+    border: none;
+  }
+
+input.playlistName {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  padding-bottom: .5rem;
+  margin-top: .5rem;
+  margin-bottom: 1.5rem;
+}
+
+input.playlistName:focus-visible {
+  outline: none;
+}

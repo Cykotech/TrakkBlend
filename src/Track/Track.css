@@ -1,0 +1,45 @@
+.track-container {
+    display: flex;
+    width: 95%;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 0;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #ebf5ee;
+}
+
+.track-container img {
+    object-fit: contain;
+    width: 80px;
+    padding-left: 1rem;
+}
+
+.text-container {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.text-container p {
+    margin: 0;
+}
+
+.text-container .title {
+    font-size: 1.5rem;
+
+}
+
+.text-container .artist {
+    font-size: .75rem;
+}
+
+.track-container button {
+    background-color: transparent;
+    color: #ebf5ee;
+    font-size: 1.5rem;
+    width: 10%;
+    padding: 0;
+}
