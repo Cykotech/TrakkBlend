@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
 }
 
@@ -16,7 +17,7 @@ body, html {
   background-color: #03191e;
   top: 0;
   position: absolute;
-  border-bottom: 1rem solid #A8F9FF;
+  border-bottom: 1rem solid #a8f9ff;
 }
 
 h1 {
@@ -27,8 +28,8 @@ h1 {
   width: fit-content;
 }
 
-.red{
-  color: #CC2936;
+.red {
+  color: #cc2936;
 }
 
 .editor {
@@ -51,4 +52,7 @@ h1 {
 
 .tracklist-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

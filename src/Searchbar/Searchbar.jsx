@@ -1,14 +1,22 @@
-import './Searchbar.css'
+/* eslint-disable react/prop-types */
+import "./Searchbar.css";
 
-function Searchbar() {
-    return (
-        <>
-            <form>
-                <input className='song-name' type='text' placeholder='Find a song'></input>
-                <input className='search' type='submit' value='Search'></input>
-            </form>
-        </>
-    )
+function Searchbar(props) {
+  return (
+    <div className="form">
+        <input
+          className="song-name"
+          type="text"
+          value={props.searchName}
+          onChange={props.handleChange}
+        ></input>
+        <button
+          className="search"
+          value="Search"
+          onClick={props.handleClick}
+        ></button>
+    </div>
+  );
 }
 
 export default Searchbar;

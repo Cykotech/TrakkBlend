@@ -1,23 +1,25 @@
 /* eslint-disable react/prop-types */
-import './Playlists.css'
-import Button from './Button.jsx';
-import TrackList from '../TrackList/TrackList';
-import { useState } from 'react';
+import "./Playlists.css";
+import TrackList from "../TrackList/TrackList";
 
 function Playlists(props) {
-    const [playlist, setPlaylist] = useState();
-
-    return (
-        <div className="container">
-            <input 
-                type="text" 
-                placeholder="Playlist Name" 
-                className="playlistName"
-            />
-            <TrackList playlist={props.playlist}/>
-            <Button />   
-        </div>
-    )
+  return (
+    <div className="container">
+      <input
+        type="text"
+        placeholder={props.playlistName}
+        value={props.playlistName}
+        className="playlistName"
+        onChange={props.handleChange}
+      />
+      <TrackList
+        playlist={props.playlist}
+        isRemove="true"
+        removeTrack={props.removeTrack}
+      />
+      <button onClick={props.handleClick}>Save to Spotify</button>
+    </div>
+  );
 }
 
 export default Playlists;
