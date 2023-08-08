@@ -1,7 +1,4 @@
-.form {
-    height: 15rem;
-    margin-top: 12rem;
-    margin-bottom: 5rem;
+form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -12,6 +9,8 @@
   input.song-name {
     width: 30%;
     padding: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
     border-radius: 1.5rem;
     background-color: #03191e;
     border: none;
@@ -22,7 +21,7 @@
     text-align: center;
   }
   
-  button.search {
+  input.search {
     background-color: #03191e;
     border-radius: .5rem;
     padding: 1.5rem;
@@ -30,5 +29,6 @@
     font-size: 1.5rem;
     letter-spacing: 1.5px;
     color: #A8F9FF;
+    margin-bottom: 5rem;
   }
   

@@ -3,25 +3,25 @@ const redirectUri = "http://localhost:5173/callback";
 const baseUrl = "https://api.spotify.com";
 let accessToken;
 
-function removeAccessTokenFromUrl() {
-  const { history, location } = window;
-  const { search } = location;
-  if (
-    search &&
-    search.indexOf("access_token") !== -1 &&
-    history &&
-    history.replaceState
-  ) {
-    // remove access_token from url
-    const cleanSearch = search
-      .replace(/(&|\?)access_token([_A-Za-z0-9=.%]+)/g, "")
-      .replace(/^&/, "?");
-    // replace search params with clean params
-    const cleanURL = location.toString().replace(search, cleanSearch);
-    // use browser history API to clean the params
-    history.replaceState({}, "", cleanURL);
-  }
-}
+// function removeAccessTokenFromUrl() {
+//   const { history, location } = window;
+//   const { search } = location;
+//   if (
+//     search &&
+//     search.indexOf("access_token") !== -1 &&
+//     history &&
+//     history.replaceState
+//   ) {
+//     // remove access_token from url
+//     const cleanSearch = search
+//       .replace(/(&|\?)access_token([_A-Za-z0-9=.%]+)/g, "")
+//       .replace(/^&/, "?");
+//     // replace search params with clean params
+//     const cleanURL = location.toString().replace(search, cleanSearch);
+//     // use browser history API to clean the params
+//     history.replaceState({}, "", cleanURL);
+//   }
+// }
 
 const Spotify = {
   getAccessToken() {
@@ -44,7 +44,7 @@ const Spotify = {
       // null is the title parameter and in this context is ignored
       // "/" will display the root URL without query parameters
       window.history.pushState("Access Token", null, "/");
-      removeAccessTokenFromUrl();
+      // removeAccessTokenFromUrl();
       return accessToken;
       // If either the access token is invalid or expired, will redirect to request a new token
     } else {
@@ -56,7 +56,6 @@ const Spotify = {
   search(term) {
     // Calls a valid access token
     const accessToken = this.getAccessToken();
-    console.log(accessToken);
     return (
       // Creates a GET request using the declared url as the first parameter and puts the access token as the second parameter
       fetch(`${baseUrl}/v1/search?type=track&q=${term}`, {
@@ -73,17 +72,43 @@ const Spotify = {
           if (!jsonResponse.tracks) {
             return [];
           }
-          console.log(jsonResponse);
           // Otherwise, the response is mapped as such.
-          return jsonResponse.tracks.items.map((track) => ({
+          let trackArray = jsonResponse.tracks.items.map((track) => ({
             id: track.id,
             name: track.name,
             artist: track.artists[0].name,
             album: track.album.name,
             uri: track.uri,
+            image: track.album.images[0].url,
           }));
+          return trackArray;
         })
     );
+  },
+
+  savePlaylist(name, trackUris) {
+    const accessToken = this.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+
+    return fetch(`${baseUrl}/v1/me`, { headers: headers })
+      .then((response) => response.json())
+      .then((jsonResponse) => {
+        let userId = jsonResponse.id;
+        return fetch(`${baseUrl}/v1/users/${userId}/playlists`, {
+          headers: headers,
+          method: "POST",
+          body: JSON.stringify({name: name})
+        })
+          .then((response) => response.json())
+          .then(jsonResponse => {
+            let playlistId = jsonResponse.id;
+            return fetch(`${baseUrl}/v1/playlists/${playlistId}/tracks`, {
+              headers: headers,
+              method: 'POST',
+              body: JSON.stringify({uris: trackUris})
+            })
+          });
+      });
   },
 };
 

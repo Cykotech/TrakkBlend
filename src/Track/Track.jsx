@@ -25,7 +25,7 @@ function Track(props) {
     >
       <img src={props.track.image} />
       <div className="text-container">
-        <p className="title">{props.track.title}</p>
+        <p className="title">{props.track.name}</p>
         <p className="artist">{props.track.artist}</p>
       </div>
       {renderButton()}

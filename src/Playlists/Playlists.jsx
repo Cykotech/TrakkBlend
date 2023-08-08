@@ -7,7 +7,6 @@ function Playlists(props) {
     <div className="container">
       <input
         type="text"
-        placeholder={props.playlistName}
         value={props.playlistName}
         className="playlistName"
         onChange={props.handleChange}

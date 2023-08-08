@@ -3,7 +3,6 @@ import Track from "../Track/Track";
 
 function TrackList(props) {
   const tracks = props.results || props.playlist;
-  console.log(tracks);
 
   return (
     <div className="tracklist-container">
