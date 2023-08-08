@@ -1,4 +1,4 @@
-form {
+.searchBar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,7 +21,7 @@ form {
     text-align: center;
   }
   
-  input.search {
+  button.search {
     background-color: #03191e;
     border-radius: .5rem;
     padding: 1.5rem;

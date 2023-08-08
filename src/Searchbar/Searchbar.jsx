@@ -15,20 +15,19 @@ function Searchbar(props) {
   };
 
   return (
-    <form>
+    <div className="searchBar">
       <input
         className="song-name"
         type="text"
         value={term}
         onChange={handleChange}
       ></input>
-      <input
-        type="submit"
+      <button
         className="search"
         value="Search"
         onClick={search}
-      ></input>
-    </form>
+      >Search</button>
+    </div>
   );
 }
 

@@ -8,7 +8,7 @@ import { useState } from "react";
 function App() {
   const [results, SetResults] = useState([]);
   const [playlist, SetPlaylist] = useState([]);
-  const [playlistName, SetPlaylistName] = useState("Playlist Name");
+  const [playlistName, SetPlaylistName] = useState("");
 
   function addTrack(track) {
     if (playlist.some((savedTrack) => savedTrack.id === track.id)) {
