@@ -8,12 +8,18 @@ button {
   letter-spacing: 1.5px;
   color: #03191e;
   border: none;
+  box-shadow: 2px 2px 2px #EBF5EE;
+}
+
+button:active {
+  box-shadow: none;
+  transform: translate(2px, 2px);
 }
 
 input.playlistName {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #EBF5EE;
   width: 100%;
   font-size: 2rem;
   text-align: center;
@@ -22,6 +28,8 @@ input.playlistName {
   margin-bottom: 1.5rem;
 }
 
-input.playlistName:focus-visible {
-  outline: none;
+input.playlistName:placeholder {
+  color: #EBF5EE;
 }
+
+

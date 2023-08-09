@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    
   }
   
   input.song-name {
@@ -19,9 +18,15 @@
     letter-spacing: 1.5px;
     color: #A8F9FF;
     text-align: center;
+    box-shadow: 5px 5px 5px #A8F9FF;
+  }
+
+  input.song-name:focus {
+    outline: #EBF5EE;
   }
   
   button.search {
+    width: fit-content;
     background-color: #03191e;
     border-radius: .5rem;
     padding: 1.5rem;
@@ -30,5 +35,12 @@
     letter-spacing: 1.5px;
     color: #A8F9FF;
     margin-bottom: 5rem;
+    box-shadow: 5px 5px 5px #A8F9FF;
+  }
+
+  button.search:active {
+    box-shadow: none;
+    transform: translate(5px, 5px);
+    color: #cc2936;
   }
   

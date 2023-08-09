@@ -4,6 +4,7 @@ import Results from "./Results/Results";
 import Playlists from "./Playlists/Playlists/";
 import Spotify from "./Spotify/Spotify";
 import { useState } from "react";
+import background from "./assets/dj-background.png";
 
 function App() {
   const [results, SetResults] = useState([]);
@@ -40,24 +41,29 @@ function App() {
 
   return (
     <>
-      <div className="header">
-        <h1>
-          Tra<span className="red">kk</span>Blend
-        </h1>
-      </div>
-      <Searchbar onSearch={submitSearch} />
-      <div className="editor">
-        <Results
-          results={results}
-          addTrack={addTrack}
-        />
-        <Playlists
-          handleChange={handlePlaylistChange}
-          playlist={playlist}
-          removeTrack={removeTrack}
-          playlistName={playlistName}
-          handleClick={savePlaylist}
-        />
+      
+      <img className="background" src={background}></img>
+        <div className="header">
+          <h1>
+            Tra<span className="red">kk</span>Blend
+          </h1>
+        </div>
+        
+        <div className="app">
+        <Searchbar onSearch={submitSearch} />
+        <div className="editor">
+          <Results
+            results={results}
+            addTrack={addTrack}
+          />
+          <Playlists
+            handleChange={handlePlaylistChange}
+            playlist={playlist}
+            removeTrack={removeTrack}
+            playlistName={playlistName}
+            handleClick={savePlaylist}
+          />
+        </div>
       </div>
     </>
   );
