@@ -12,9 +12,9 @@ function Track(props) {
 
   const renderButton = () => {
     if (props.isRemove) {
-      return <button onClick={handleRemove}>-</button>;
+      return <button className="remove" onClick={handleRemove}>-</button>;
     } else {
-      return <button onClick={handleAdd}>+</button>;
+      return <button className="add" onClick={handleAdd}>+</button>;
     }
   };
 

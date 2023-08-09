@@ -1,4 +1,4 @@
-const clientId = "d1f6fd9bcb294516b4ae600e4d137f45";
+const clientId = "";
 const redirectUri = "http://localhost:5173/callback";
 const baseUrl = "https://api.spotify.com";
 let accessToken;

@@ -32,7 +32,7 @@ function App() {
     const trackUris = playlist.map((track) => track.uri);
     Spotify.savePlaylist(playlistName, trackUris);
     SetPlaylist([]);
-    SetPlaylistName("Playlist Name");
+    SetPlaylistName("");
   };
 
   const submitSearch = (term) => {
