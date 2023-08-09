@@ -41,15 +41,17 @@ function App() {
 
   return (
     <>
-      
-      <img className="background" src={background}></img>
-        <div className="header">
-          <h1>
-            Tra<span className="red">kk</span>Blend
-          </h1>
-        </div>
-        
-        <div className="app">
+      <img
+        className="background"
+        src={background}
+      ></img>
+      <div className="header">
+        <h1>
+          Tra<span className="red">kk</span>Blend
+        </h1>
+      </div>
+
+      <div className="app">
         <Searchbar onSearch={submitSearch} />
         <div className="editor">
           <Results

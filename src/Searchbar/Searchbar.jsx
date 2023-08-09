@@ -26,7 +26,9 @@ function Searchbar(props) {
         className="search"
         value="Search"
         onClick={search}
-      >Search</button>
+      >
+        Search
+      </button>
     </div>
   );
 }
