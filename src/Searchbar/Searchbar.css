@@ -1,46 +1,51 @@
 .searchBar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input.song-name {
+  width: 30%;
+  padding: 1rem;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  border-radius: 1.5rem;
+  background-color: #03191e;
+  border: none;
+  font-family: inherit;
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+  color: #a8f9ff;
+  text-align: center;
+  box-shadow: 5px 5px 5px #a8f9ff;
+}
+
+input.song-name:focus {
+  outline: #ebf5ee;
+}
+
+button.search {
+  width: fit-content;
+  background-color: #03191e;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
+  color: #a8f9ff;
+  margin-bottom: 5rem;
+  box-shadow: 5px 5px 5px #a8f9ff;
+}
+
+button.search:active {
+  box-shadow: none;
+  transform: translate(5px, 5px);
+  color: #cc2936;
+}
+
+@media screen and (max-width: 425px) {
   input.song-name {
-    width: 30%;
-    padding: 1rem;
-    margin-top: 5rem;
-    margin-bottom: 2rem;
-    border-radius: 1.5rem;
-    background-color: #03191e;
-    border: none;
-    font-family: inherit;
-    font-size: 2rem;
-    letter-spacing: 1.5px;
-    color: #A8F9FF;
-    text-align: center;
-    box-shadow: 5px 5px 5px #A8F9FF;
+    width: 75%;
   }
-
-  input.song-name:focus {
-    outline: #EBF5EE;
-  }
-  
-  button.search {
-    width: fit-content;
-    background-color: #03191e;
-    border-radius: .5rem;
-    padding: 1.5rem;
-    font-family: inherit;
-    font-size: 1.5rem;
-    letter-spacing: 1.5px;
-    color: #A8F9FF;
-    margin-bottom: 5rem;
-    box-shadow: 5px 5px 5px #A8F9FF;
-  }
-
-  button.search:active {
-    box-shadow: none;
-    transform: translate(5px, 5px);
-    color: #cc2936;
-  }
-  
+}
