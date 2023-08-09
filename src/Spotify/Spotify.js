@@ -1,4 +1,4 @@
-const clientId = "";
+const clientId = "d1f6fd9bcb294516b4ae600e4d137f45";
 const redirectUri = "http://localhost:5173/callback";
 const baseUrl = "https://api.spotify.com";
 let accessToken;
@@ -24,30 +24,28 @@ const Spotify = {
 
   search(term) {
     const accessToken = this.getAccessToken();
-    return (
-      fetch(`${baseUrl}/v1/search?type=track&q=${term}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+    return fetch(`${baseUrl}/v1/search?type=track&q=${term}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((jsonResponse) => {
-          if (!jsonResponse.tracks) {
-            return [];
-          }
-          let trackArray = jsonResponse.tracks.items.map((track) => ({
-            id: track.id,
-            name: track.name,
-            artist: track.artists[0].name,
-            album: track.album.name,
-            uri: track.uri,
-            image: track.album.images[0].url,
-          }));
-          return trackArray;
-        })
-    );
+      .then((jsonResponse) => {
+        if (!jsonResponse.tracks) {
+          return [];
+        }
+        let trackArray = jsonResponse.tracks.items.map((track) => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          uri: track.uri,
+          image: track.album.images[0].url,
+        }));
+        return trackArray;
+      });
   },
 
   savePlaylist(name, trackUris) {
@@ -65,16 +63,16 @@ const Spotify = {
         return fetch(`${baseUrl}/v1/users/${userId}/playlists`, {
           headers: headers,
           method: "POST",
-          body: JSON.stringify({name: name})
+          body: JSON.stringify({ name: name }),
         })
           .then((response) => response.json())
-          .then(jsonResponse => {
+          .then((jsonResponse) => {
             let playlistId = jsonResponse.id;
             return fetch(`${baseUrl}/v1/playlists/${playlistId}/tracks`, {
               headers: headers,
-              method: 'POST',
-              body: JSON.stringify({uris: trackUris})
-            })
+              method: "POST",
+              body: JSON.stringify({ uris: trackUris }),
+            });
           });
       });
   },
