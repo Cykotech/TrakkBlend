@@ -43,12 +43,12 @@ function App() {
     <>
       <img
         className="background"
-        src={background}
-      ></img>
+        src={background}></img>
       <div className="header">
         <h1>
           Tra<span className="red">kk</span>Blend
         </h1>
+        <button onClick={Spotify.accountAuthorize}>Login</button>
       </div>
 
       <div className="app">
