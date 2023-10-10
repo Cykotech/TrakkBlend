@@ -1,28 +1,90 @@
 const clientId = "d1f6fd9bcb294516b4ae600e4d137f45";
-const redirectUri = "https://trakkblend.netlify.app/callback";
+const redirectUri = "https://localhost:5173/callback";
 const baseUrl = "https://api.spotify.com";
-let accessToken;
 
 const Spotify = {
-  // getAccessToken() {
-  //   if (accessToken) {
-  //     return accessToken;
-  //   }
-  //   const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-  //   const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-  //   if (accessTokenMatch && expiresInMatch) {
-  //     accessToken = accessTokenMatch[1];
-  //     const expiresIn = Number(expiresInMatch[1]);
-  //     window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
-  //     window.history.pushState("Access Token", null, "/");
-  //     return accessToken;
-  //   } else {
-  //     const accessUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-  //     window.location = accessUrl;
-  //   }
-  // },
+  getAccessToken() {
+    let access_token = window.localStorage.getItem("access_token");
+    const urlParams = new URLSearchParams(window.location.search);
+    let code = urlParams.get("code");
 
-  // Commented out implicit grant auth flow. Login button in App.jsx calls accountAuthorize. The browser error displays after Spotify authorization.
+    // function isTokenExpired(token) {
+    //   if (!token || !token.expires_in) {
+    //     return true;
+    //   }
+
+    //   const currentTimeInSeconds = Date.now() / 1000;
+    //   const expirationTimeInSeconds = token.issued_at + token.expires_in;
+
+    //   return currentTimeInSeconds >= expirationTimeInSeconds;
+    // }
+
+    function requestAccessToken() {
+      let codeVerifier = localStorage.getItem("code_verifier");
+
+      let body = new URLSearchParams({
+        grant_type: "authorization_code",
+        code: code,
+        redirect_uri: redirectUri,
+        client_id: clientId,
+        code_verifier: codeVerifier,
+      });
+
+      const response = fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: body,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("HTTP status " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          localStorage.setItem("access_token", data.access_token);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      console.log(response);
+    }
+
+    // function refreshAccessToken() {
+    //   const body = new URLSearchParams({grant_type: "refresh_token", refreshToken: , clientId: clientId})
+    //   const response = fetch("https://accounts.spotify.com/api/token", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //     },
+    //     body: body,
+    //   })
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error("HTTP status " + response.status);
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       localStorage.setItem("access_token", data.access_token);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error:", error);
+    //     });
+    // }
+
+    if (!access_token) {
+      requestAccessToken();
+    }
+
+    // if (isTokenExpired(access_token)) {
+    //   refreshAccessToken();
+    // }
+
+    return access_token;
+  },
 
   accountAuthorize() {
     function generateRandomString(length) {
