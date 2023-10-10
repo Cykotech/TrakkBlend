@@ -1,5 +1,5 @@
 const clientId = "d1f6fd9bcb294516b4ae600e4d137f45";
-const redirectUri = "https://localhost:5173/callback";
+const redirectUri = "https://trakkblend.netlify.app/callback";
 const baseUrl = "https://api.spotify.com";
 
 const Spotify = {
