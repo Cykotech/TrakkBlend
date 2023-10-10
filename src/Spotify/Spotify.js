@@ -5,22 +5,22 @@ const baseUrl = "https://api.spotify.com";
 const Spotify = {
   getAccessToken() {
     let access_token = window.localStorage.getItem("access_token");
-    const urlParams = new URLSearchParams(window.location.search);
-    let code = urlParams.get("code");
 
-    // function isTokenExpired(token) {
-    //   if (!token || !token.expires_in) {
-    //     return true;
-    //   }
+    function isTokenExpired(token) {
+      if (!token || !token.expires_in) {
+        return true;
+      }
 
-    //   const currentTimeInSeconds = Date.now() / 1000;
-    //   const expirationTimeInSeconds = token.issued_at + token.expires_in;
+      const currentTimeInSeconds = Date.now() / 1000;
+      const expirationTimeInSeconds = token.issued_at + token.expires_in;
 
-    //   return currentTimeInSeconds >= expirationTimeInSeconds;
-    // }
+      return currentTimeInSeconds >= expirationTimeInSeconds;
+    }
 
     function requestAccessToken() {
       let codeVerifier = localStorage.getItem("code_verifier");
+      const urlParams = new URLSearchParams(window.location.search);
+      let code = urlParams.get("code");
 
       let body = new URLSearchParams({
         grant_type: "authorization_code",
@@ -49,40 +49,43 @@ const Spotify = {
         .catch((error) => {
           console.error("Error:", error);
         });
-      console.log(response);
     }
 
-    // function refreshAccessToken() {
-    //   const body = new URLSearchParams({grant_type: "refresh_token", refreshToken: , clientId: clientId})
-    //   const response = fetch("https://accounts.spotify.com/api/token", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //     },
-    //     body: body,
-    //   })
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error("HTTP status " + response.status);
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       localStorage.setItem("access_token", data.access_token);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error:", error);
-    //     });
-    // }
+    function refreshAccessToken() {
+      const body = new URLSearchParams({
+        grant_type: "refresh_token",
+        refreshToken: "",
+        clientId: clientId,
+      });
+
+      const response = fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: body,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("HTTP status " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          localStorage.setItem("access_token", data.access_token);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
 
     if (!access_token) {
       requestAccessToken();
     }
 
-    // if (isTokenExpired(access_token)) {
-    //   refreshAccessToken();
-    // }
-
+    if (isTokenExpired(access_token)) {
+      refreshAccessToken();
+    }
     return access_token;
   },
 
