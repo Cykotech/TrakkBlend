@@ -1,4 +1,4 @@
-const clientId = process.env.VITE_CLIENT_ID;
+const clientId = import.meta.env.VITE_CLIENT_ID;
 const redirectUri = "https://trakkblend.netlify.app/callback";
 const baseUrl = "https://api.spotify.com";
 
