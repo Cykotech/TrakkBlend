@@ -38,7 +38,6 @@ const Spotify = {
         body: body,
       })
         .then((response) => {
-          console.log(response);
           if (!response.ok) {
             throw new Error("HTTP status " + response.status);
           }
@@ -50,6 +49,7 @@ const Spotify = {
         .catch((error) => {
           console.error("Error:", error);
         });
+        return response;
     }
 
     function refreshAccessToken() {
@@ -79,6 +79,7 @@ const Spotify = {
         .catch((error) => {
           console.error("Error:", error);
         });
+        return response;
     }
 
     if (!access_token) {
