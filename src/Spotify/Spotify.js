@@ -49,6 +49,7 @@ const Spotify = {
         .catch((error) => {
           console.error("Error:", error);
         });
+      console.log("response " + response);
     }
 
     function refreshAccessToken() {
@@ -83,9 +84,10 @@ const Spotify = {
       requestAccessToken();
     }
 
-    if (isTokenExpired(access_token)) {
-      refreshAccessToken();
-    }
+    // if (isTokenExpired(access_token)) {
+    //  refreshAccessToken();
+    // }
+
     return access_token;
   },
 
@@ -140,6 +142,7 @@ const Spotify = {
 
   search(term) {
     const accessToken = this.getAccessToken();
+    console.log("access token " + accessToken);
     return fetch(`${baseUrl}/v1/search?type=track&q=${term}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
