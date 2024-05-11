@@ -23,6 +23,8 @@ img.background {
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
   position: relative;
   width: 100%;
   padding-top: 1.5rem;
@@ -37,6 +39,21 @@ h1 {
   margin: 0;
   margin-left: 25%;
   width: fit-content;
+}
+
+.header button {
+  width: fit-content;
+  background-color: #5a7684;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: #03191e;
+  margin-right: 5rem;
+  border: none;
+  box-shadow: 2px 2px 2px #EBF5EE;
 }
 
 .red {
